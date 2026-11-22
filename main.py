@@ -1,29 +1,32 @@
 #!/usr/bin/env python3
-"""Copy poster.png to the grader output directory as entry.png.
+"""Copy-only entrypoint: copies the pre-rendered poster.png to $MAKEFUN_OUTPUT_DIR/entry.png.
 
-Copy-only: never writes into the repo (read-only at grade time) and never
-deletes the output directory itself (that fails EACCES, because deleting
-a directory needs write permission on its parent). It only clears the
-directory's contents, then copies one file. Deterministic: the same
-bytes on every run.
+Clears only the contents of the output directory; never deletes the
+output directory itself.
 """
 import os
 import shutil
+import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+SRC = os.path.join(HERE, "poster.png")
 
 
 def main():
-    here = os.path.dirname(os.path.abspath(__file__))
-    out = os.environ.get("MAKEFUN_OUTPUT_DIR", "out")
+    out = os.environ.get("MAKEFUN_OUTPUT_DIR")
+    if not out:
+        print("MAKEFUN_OUTPUT_DIR not set", file=sys.stderr)
+        return 1
     os.makedirs(out, exist_ok=True)
     for name in os.listdir(out):
-        path = os.path.join(out, name)
-        if os.path.isdir(path) and not os.path.islink(path):
-            shutil.rmtree(path)
+        p = os.path.join(out, name)
+        if os.path.isdir(p) and not os.path.islink(p):
+            shutil.rmtree(p)
         else:
-            os.remove(path)
-    shutil.copyfile(os.path.join(here, "poster.png"),
-                    os.path.join(out, "entry.png"))
+            os.remove(p)
+    shutil.copyfile(SRC, os.path.join(out, "entry.png"))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
