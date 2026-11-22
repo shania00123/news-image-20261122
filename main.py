@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Entrypoint: copy poster.png into the grader output directory.
+"""Entrypoint for the RIVAL6 poster.
 
-Only the *contents* of the output directory are cleared; the directory
-itself is never removed (the grader may hold it open or mount it).
-The poster is pre-rendered by render_rival5.py, so this entrypoint does
-no drawing, no network and no writes outside the output directory.
+Copies the pre-rendered poster.png into the grader output directory.
+Only the *contents* of that directory are cleared -- the directory itself
+is never deleted, in case the grader holds it open or mounts it read-only
+from above. No drawing, no network, no writes outside the output dir.
 """
 import os
 import shutil
