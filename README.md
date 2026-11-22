@@ -1,58 +1,50 @@
-# news-image-20261122 — RIVAL6: "THE SUNDAY ASSEMBLY"
+# news-image-20261122 — RIVAL7: "THE SUNDAY DOSSIER"
 
 A one-day newspaper poster for **Sunday 22 November 2026**: 40 stories,
 7 regions, every story dated, every card labelled by certainty.
 
-## What changed vs RIVAL5 ("THE SUNDAY VERDICT")
+## What changed vs RIVAL6 ("THE SUNDAY ASSEMBLY")
 
-RIVAL5 won duel round 5 (4–1–1 vs RIVAL4) but stayed a coin-flip vs rank 1
-(judge estimate 99.0–99.5%). RIVAL6 attacks the exact weaknesses the round-5
+RIVAL6 won duel round 6 (4–0–2 vs RIVAL5) but stayed a coin-flip vs rank 1
+(judge estimate 99.0–99.5%). RIVAL7 attacks the exact weaknesses the round-6
 jury named:
 
-1. **Hero 1 is a real scene now.** RIVAL5's COP31 art was flags + a clock
-   dial — abstract. RIVAL6 draws the final plenary in Antalya as a real
-   assembly hall: projection screen ("COP31 · ANTALYA · FINAL PLENARY"),
-   presidium table with flags, a podium, curved rows of delegate desks with
-   nameplates — and a block of pale **empty chairs** where delegations
-   walked out. This is the one lever that attacks the art edge of #1/#2/#3
-   (real illustrated scenes: Kyiv block, COP plenary, Bahrain radar).
-   Heroes 2 and 3 are also re-drawn as night scenes (Kyiv skyline with
-   drone trails and a burning block; Manama rooftops with radar dishes,
-   an interceptor streak and a burning plant).
-2. **Hartha fixed: † FRI → † SAT.** The Hartha power-station fire was
-   Saturday 21 Nov 06:00, ≥4 dead, 35 injured (Al Jazeera / Reuters, 21 Nov).
-   ALSO #35 now reads "† SAT".
-3. **Manipur given an honest, dated attribution.** The toll was still
-   moving on Sunday (official Sunday-morning tally 19 dead, 600+ in
-   hospital per e-pao 01:01 GMT 22 Nov; later reports 17–21). ALSO #38 now
-   reads "toll climbs to 19, 600+ in hospital — Sun a.m., still rising"
-   and the misleading † FRI tag is dropped (victims span 10–21 Nov).
-4. **Senate DATE CHECK fixed: Fri 20 Nov → Wed 18 Nov.** Thune announced
-   the $350bn defence-push stall on Wednesday after closed-door GOP
-   meetings (WSJ / Washington Post, 18 Nov); Friday was only the
-   Punchbowl blame story.
-5. **DATE CHECK 23 → 18 strongest.** Cutting the five weakest traps
-   (Nvidia SEC probe, El Chapo Isidro, Trump–Xi–Putin talks, Somalia
-   orders UAE envoy out — duplicated as ALSO #37 — H-6 bomber patrol)
-   gives the footer back the airiness RIVAL4 had, without touching the
-   320px-readable top half.
-6. **Two small details verified and fixed.** Liverpool deck "United 18th"
-   was wrong: the live table on Sunday morning already had Man Utd **19th**
-   (8 pts; Sunderland 18th on 9 pts — premierleaguefixtures.net, checked
-   22 Nov 06:00 GMT; ESPN table). Deck now says "United 19th". HK deck
-   "5,640 of 5,709 voters" is verified exact (info.gov.hk: 5,640 cast,
-   98.79%, count done 22:15; record beats 89.77% in 2021 — China Daily),
-   so the deck now states the 2021 comparison explicitly.
+1. **The four DATE CHECK traps are back — all 22 items, footer kept airy.**
+   RIVAL6 cut Nvidia (SEC probe, Fri 20 Nov — Reuters 20 Nov; WSJ reported
+   the probe first on Tue 17 Nov), 'El Chapo Isidro' (captured Fri night
+   20 Nov in Guasave, announced Sat 21 Nov — CNN/AP), Trump–Xi–Putin talks
+   (first-ever trilateral, Thu 19 Nov in Shenzhen — AP) and the H-6 bomber
+   near Manila (Sat 21 Nov, turned back 170 km from Manila — United24 Media
+   21 Nov 14:43, flight-tracking; mission unconfirmed, date + event real).
+   Only Somalia stays cut: it duplicates ALSO #37 (UAE envoy's 72 hours run
+   out today, ordered Thu). The footer keeps RIVAL6's airiness with smaller
+   type (8pt) and tighter leading (10px) across three columns.
+2. **Richer hero art.** The COP plenary now has varied delegate figures
+   (five skin tones, seven suit colours, laptops, nameplates), warm
+   spotlight cones, shadows under the desks and a pale walkout chair block.
+   Heroes 2 and 3 get texture too: Kyiv has searchlight beams, smoke and
+   embers over a lit-window skyline; Manama has radar dishes at varied
+   angles, a burning civilian plant and a sea strip.
+3. **The thick "4–0 FULL TIME" score badge is back** (RIVAL5 style) — a
+   solid red badge on the Liverpool card's art strip, readable at 320px.
+4. **Hero 3 deck restores "a civilian plant burned"** (the target was a
+   civilian industrial site — confirmed by #1's own deck).
+5. **Map: Europe fan-out widened** — pin labels pushed further out with
+   longer leader lines, so the densest cluster breathes more.
+6. **Manipur kept honest**: "toll climbs to 19, 600+ in hospital — Sun a.m.,
+   still rising" (official Sunday-morning tally; the toll moved 16→21
+   through Sunday, so no number is locked without a time attribution).
 
-## Kept from RIVAL5 / rounds 1–5 (all re-verified)
+## Kept from RIVAL6 / rounds 1–6 (all re-verified)
 
-- HK turnout final **98.79%**; gold **$3,539**; Bitcoin Sunday high
-  **$61,568** (high Sunday; low Saturday $55,130); COP31 "collapses with
-  no deal"; Bahrain 2 hurt; Japan 62% (not 52%); Bayelsa 24 (not 26);
-  Cantine DR Congo night of 5–6 Nov, 33 dead; Newcastle 2–2 Arsenal &
-  Chelsea 1–4 Leeds = Saturday; Aoun speech = Saturday; Liverpool 4–0
-  (Szoboszlai 10', Wirtz 13', Ngumoha 66', Muñoz 82'; Yoro sent off 8');
-  Hull 2–0 Brighton (McBurnie brace 90+2'/90+5').
+- HK turnout final **98.79%** (5,640 of 5,709 voters, count done 22:15,
+  beats 89.77% in 2021); gold **$3,539**; Bitcoin Sunday high **$61,568**
+  (low Saturday $55,130); COP31 "collapses with no deal"; Bahrain 2 hurt;
+  Japan 62% (not 52%); Bayelsa 24 (not 26); Cantine DR Congo night of
+  5–6 Nov, 33 dead; Newcastle 2–2 Arsenal & Chelsea 1–4 Leeds = Saturday;
+  Aoun speech = Saturday; Senate $350bn stall = Wed 18 Nov; Liverpool 4–0
+  (Szoboszlai 10', Wirtz 13', Ngumoha 66', Muñoz 82'; Yoro sent off 8';
+  United 19th); Hull 2–0 Brighton; Hartha † SAT.
 - MARKETS band, all six figures verified: TASI −1.95% 9,960.44; QSE −1.59%
   9,902.87; EGX30 −2.85% 49,989.79; EGX70 −5.55% 16,534.42.
 - Certainty labels on every card + "HOW TO READ" legend; NO DEAL badge on
@@ -63,8 +55,8 @@ jury named:
 
 ## Contents
 
-- `render_rival6.py` — PIL-only renderer, deterministic (no timestamps,
-  no randomness). Run: `python3 render_rival6.py poster.png`
+- `render_rival7.py` — PIL-only renderer, deterministic (no timestamps,
+  no randomness). Run: `python3 render_rival7.py poster.png`
 - `main.py` — entrypoint: copies `poster.png` into the grader output
   directory, clearing only its *contents* (never the directory itself).
 - `poster.png` — 1024×1024 render.
