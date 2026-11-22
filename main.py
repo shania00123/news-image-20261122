@@ -1,32 +1,34 @@
 #!/usr/bin/env python3
-"""Copy-only entrypoint: copies the pre-rendered poster.png to $MAKEFUN_OUTPUT_DIR/entry.png.
+"""Entrypoint for news-image-20261122 (RIVAL3).
 
-Clears only the contents of the output directory; never deletes the
-output directory itself.
+Copies the pre-rendered poster.png into the grader output directory as
+entry.png. No network, deterministic, exit 0.
+
+Only the *contents* of the output directory are cleared, never the
+directory itself (deleting the directory breaks the grader mount).
 """
 import os
 import shutil
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SRC = os.path.join(HERE, "poster.png")
 
 
 def main():
-    out = os.environ.get("MAKEFUN_OUTPUT_DIR")
-    if not out:
-        print("MAKEFUN_OUTPUT_DIR not set", file=sys.stderr)
-        return 1
-    os.makedirs(out, exist_ok=True)
-    for name in os.listdir(out):
-        p = os.path.join(out, name)
-        if os.path.isdir(p) and not os.path.islink(p):
-            shutil.rmtree(p)
+    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR") or "/output"
+    os.makedirs(out_dir, exist_ok=True)
+    # Clear only the contents of the output directory, never the dir itself.
+    for name in os.listdir(out_dir):
+        path = os.path.join(out_dir, name)
+        if os.path.isdir(path) and not os.path.islink(path):
+            shutil.rmtree(path)
         else:
-            os.remove(p)
-    shutil.copyfile(SRC, os.path.join(out, "entry.png"))
+            os.remove(path)
+    src = os.path.join(HERE, "poster.png")
+    dst = os.path.join(out_dir, "entry.png")
+    shutil.copyfile(src, dst)
     return 0
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    sys.exit(main())
