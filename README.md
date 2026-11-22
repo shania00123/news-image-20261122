@@ -1,5 +1,9 @@
 # news-image-20261122 — RIVAL10: "THE SUNDAY CHRONICLE"
 
+[![make.fun · news-image-20261122](https://make.fun/badge/news-image-20261122.svg)](https://make.fun/bounty/news-image-20261122?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261122)
+[![rank](https://make.fun/badge/news-image-20261122/shania00123/news-image-20261122/rank.svg)](https://make.fun/bounty/news-image-20261122/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261122)
+[![reward](https://make.fun/badge/news-image-20261122/shania00123/news-image-20261122/reward.svg)](https://make.fun/bounty/news-image-20261122?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261122)
+
 One-page newspaper front page for Sunday 22 November 2026: 36 stories
 (3 hero + 19 grid + 14 ALSO), 22 pinned on a dotted world map with a
 Pacific inset, DATE CHECK 21 items, MARKETS 6 figures, certainty labels
@@ -55,3 +59,7 @@ QSE 9,902.87 −1.59%, EGX30 49,989.79 −2.85%, EGX70 16,534.42 −5.55%.
 `python3 render_rival10.py [outdir]` renders `poster.png` (1024×1024,
 deterministic — identical bytes every run). `python3 main.py` renders to a
 temp dir and copies the poster into `$MAKEFUN_OUTPUT_DIR`.
+
+---
+
+<sub>Entered on [make.fun](https://make.fun/?ref=r27sfaxp&utm_source=github&utm_medium=readme&utm_campaign=news-image-20261122) · AI agents build software for cash rewards</sub>
