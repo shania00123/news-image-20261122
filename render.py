@@ -1,25 +1,35 @@
 #!/usr/bin/env python3
-"""THE SUNDAY GLOBE v4 — Sunday 22 November 2026, world news in one image.
+"""THE SUNDAY GLOBE v5 — Sunday 22 November 2026, world news in one image.
 
 Renders poster.png (1024x1024, < 1 MiB) deterministically with PIL only.
 No network, no randomness, no timestamps: the same bytes on every run.
 
-v4 levers vs v3 (95.77%):
-- 3 new hero stories the v3 missed and verified from the web on 22 Nov:
-  Russian missiles in Poland (NATO "every inch"), the Bayelsa funeral
-  boat toll rising to 24, and the $350Bn Pentagon fight stalling.
-- The Kyiv Sunday-morning drone collapse (14 missing) promoted from
-  ALSO to hero; AUKUS, Manipur, ATP final and Gaza move to ALSO.
-- Accuracy fixes: Cikande missing 36 -> 39 (per 22 Nov reports);
-  the Bahrain hero no longer claims the Hormuz tanker strikes (they
-  were Saturday) and drops the unverified "DAY 130" label; both go
-  into DATE CHECK with their true Saturday dates.
-- New MARKETS band: a small bar chart of Sunday Gulf closes
-  (Saudi -2.0, Qatar -1.6, Egypt -2.9, Bahrain -0.6) plus Friday S&P.
-- New QUOTE strip inside the verdict: Rutte's "every inch" line.
-- Richer drawn scenes (background + foreground + stat bar) and a
-  bigger, more legible ALSO section (24 items, larger type).
-All 36 stories are dated Sunday 22 November 2026; the 10 items in
+v5 levers vs v4 (96.87%):
+- Date-accuracy surgery, the v4 weak spot: the Kyiv hero was really DYMER
+  (45 km north of Kyiv); the F1 hero said Piastri "falls from 17th" when he
+  climbed from 17th to 3rd; the Cikande hero claimed "300 inside" when the
+  agencies said ~60 in the building; Bitcoin "down 26% in 30 days" is 25%
+  per Finnhub; Sudan's ALSO toll was 15 killed when Sunday reports said 4.
+  The Trump/NCIC hero was a SATURDAY interview, so it is demoted to DATE
+  CHECK and replaced by a verified Sunday hero: Hong Kong's record 98.79%
+  Election Committee poll (5,640 voters, 856 candidates, 723 seats).
+- AFCON "hosts named" was wrong twice (host cities, announced Saturday):
+  cut from ALSO, moved to DATE CHECK. Gaza "kill four" was Saturday too:
+  reworded to Sunday's Deir al-Balah killing. Messi reworded to the Sunday
+  reaction (coach fumes). Bahrain kept as a CLAIM with the US denial added.
+- Cut 7 weakest ALSO items (vague China/ASEAN, Lisbon/France, US tax and
+  media-split filler, the Saturday MQ-1 claim, AFCON, unverified Lviv
+  dashcam) and added two verified Sunday stories: Iran's rolling power cuts
+  start (2 hours a day) and Peru's Junín quake toll (1 dead, 853 displaced).
+  36 stories -> 31 (12 heroes + 19 ALSO), larger ALSO type (11pt).
+- NEW lever: THE DAY IN UTC — the vague "day by hours" (local times,
+  "Morning"/"Afternoon") becomes a true UTC timeline bar, 00:00-24:00 UTC,
+  with six timestamped events (Khartoum 00:00, Peru M5.0 05:51, Hong Kong
+  polls close 10:00, Seoul 10:03, COP31 collapse 16:33, ATP final 17:00).
+- Richer drawn scenes: every hero scene gains foreground detail (Polish
+  flag, Dymer rescue ladder, Pentagon clock, second F1 car, ballot box for
+  Hong Kong, Cikande hose, and more).
+All 31 stories are dated Sunday 22 November 2026; the 10 items in
 DATE CHECK are the near-misses deliberately left out, with dates.
 """
 import os
@@ -125,24 +135,24 @@ HEROES = [
      "EU, Panama and Marshall Islands reject a draft with no fossil fuels; Kurum concedes 'no agreement'.",
      "Reuters / CNN", "NO DEAL", RED),
     ("MIDDLE EAST", "CLAIM",
-     "Iran strikes US bases in Bahrain",
-     "IRGC claims strikes on Patriot radars at Al-Riffa and Awali; a Sitra plant burns and two are hurt.",
+     "Iran claims strikes on US bases in Bahrain",
+     "IRGC claims hits on two Patriot radars at Al-Riffa and Awali; US denies damage, two hurt.",
      "Al Jazeera / Reuters", "2 HURT", RED),
     ("EUROPE", "CONFIRMED",
      "Russian missiles land in Poland",
      "Two missiles and a drone cross into Poland; NATO chief Rutte vows to defend 'every inch' of its soil.",
      "NATO / Reuters", "EVERY INCH", DBLUE),
     ("EUROPE", "CONFIRMED",
-     "Drone collapses Kyiv block; 14 missing",
-     "A Russian drone hits a five-storey Kyiv block on Sunday morning; part collapses and 14 are missing.",
-     "The Hindu", "14 MISSING", (40, 40, 40)),
+     "Drone flattens Dymer block; 14 missing",
+     "A Russian drone hits a five-storey block in Dymer, 45 km north of Kyiv; 14 are unaccounted for.",
+     "AP / Reuters", "14 MISSING", (40, 40, 40)),
     ("AMERICAS", "REPORTED",
      "Pentagon $350Bn fight stalls",
-     "Senate GOP shelves Trump's $350Bn package as the Iran war splits Congress; shutdown looms.",
+     "Senate GOP stalls Trump's $350Bn package as the Iran war splits Congress; shutdown looms.",
      "Reuters / WSJ", "$350Bn", NAVY2),
     ("AMERICAS", "CONFIRMED",
      "Verstappen wins wild Las Vegas GP",
-     "Verstappen beats Norris by 0.639s after 35 lead changes; Piastri falls from 17th, Russell hits the wall.",
+     "Verstappen beats Norris by 0.639s after 35 lead changes; Piastri 3rd from 17th, Russell hits wall.",
      "Formula 1", "0.639s", RED),
     ("ASIA", "CONFIRMED",
      "India declare a record 720 for 9",
@@ -150,33 +160,33 @@ HEROES = [
      "Cricinfo", "720/9", GREEN),
     ("GLOBAL", "CONFIRMED",
      "Bitcoin back above $60,000",
-     "Closes Sunday at $60,884, up from Saturday's $55,130 low — but still down 26% in 30 days.",
+     "Sunday: $60,884, up from Saturday's $55,130 low — still down 25% in a month.",
      "Finnhub / CoinGecko", "$60,884", (138, 90, 0)),
     ("ASIA", "CONFIRMED",
      "Seoul minister quits over AI cheating",
      "Education chief Choi quits; Lee accepts in an hour; 111 device cases caught at the Suneung.",
      "AFP", "111 CASES", (40, 40, 40)),
-    ("AMERICAS", "REPORTED",
-     "Trump shrugs off FBI database hack",
-     "'It's not good,' Trump says of the NCIC breach CNN reported Friday - then revives the 'Russia hoax'.",
-     "CNN / Fox News", "NCIC", (40, 40, 40)),
+    ("ASIA", "CONFIRMED",
+     "Hong Kong votes at record 98.79%",
+     "5,640 voters cast ballots in Election Committee polls; 856 candidates chase 723 seats.",
+     "info.gov.hk", "98.79%", GREEN),
     ("AFRICA", "CONFIRMED",
      "Bayelsa boat toll rises to 24",
-     "A boat carrying mourners capsized Friday; NEMA says 24 dead, 24 rescued, search goes on.",
+     "NEMA confirms 24 dead and 24 rescued; search goes on.",
      "Reuters", "24 DEAD", (40, 40, 40)),
     ("ASIA", "CONFIRMED",
      "Hunt for 39 missing after factory fire",
-     "Rescuers comb the burnt Fonusa plant after Saturday's blaze; 300 inside, 3 dead, 39 missing.",
+     "Rescuers comb the burnt Milkita candy plant after Saturday's blaze; 3 dead, 39 missing.",
      "Reuters", "39 MISSING", RED),
 ]
 
-# ALSO: (lead, region, source) — 24 items, 3 columns x 8 rows
+# ALSO: (lead, region, source) — 19 items, 3 columns x 7 rows
 ALSO = [
     ("Australia slams US office on AUKUS", "OCEANIA", "Reuters"),
     ("Manipur liquor toll reaches 17", "ASIA", "Xinhua"),
     ("Zverev v Alcaraz for ATP Finals, 18:00 CET", "EUROPE", "ATP"),
-    ("Gaza truce frays as Israeli strikes kill four", "MIDDLE EAST", "WAFA"),
-    ("Sparta II still burning off Finland; crew out", "EUROPE", "Reuters"),
+    ("Gaza truce frays; one killed in Deir al-Balah", "MIDDLE EAST", "WAFA"),
+    ("Sparta II smoulders off Finland; 16 crew safe", "EUROPE", "Reuters"),
     ("Ukraine downs 161 of 186 drones overnight", "EUROPE", "Air force"),
     ("US denies Iran claim it hit an F-16", "MIDDLE EAST", "CENTCOM"),
     ("Qatar delegation holds talks in Tehran", "MIDDLE EAST", "Reuters"),
@@ -184,28 +194,23 @@ ALSO = [
     ("Etihad extends Riyadh halt to 30 Nov", "MIDDLE EAST", "Etihad"),
     ("Iraq PM to visit Cairo on Monday", "MIDDLE EAST", "EIN"),
     ("California braces for record king tides", "AMERICAS", "NWS"),
-    ("Messi avoids red as Inter Miami lose", "AMERICAS", "Al Jazeera"),
+    ("Messi dodges red in 3-0 loss; coach fumes", "AMERICAS", "AFP"),
     ("UK/EU food deal hailed by British firms", "EUROPE", "Guardian"),
     ("Spain faces uncertainty before 29 Nov vote", "EUROPE", ""),
-    ("China, ASEAN struggle over sea code", "ASIA", ""),
-    ("Lisbon marches on costs; France protests on", "EUROPE", "Reuters"),
-    ("Democrats seek to unwind Trump tax rules", "AMERICAS", "FT"),
-    ("Conservative media split in Trump camp", "AMERICAS", "Guardian"),
-    ("Iran claims 20th US MQ-1 drone downed", "MIDDLE EAST", "IRGC"),
-    ("AFCON 2027 hosts named", "AFRICA", "CAF"),
+    ("Iran power cuts start: 2 hours a day", "MIDDLE EAST", "Straits Times"),
+    ("Junín quake cost: 1 dead, 853 displaced", "AMERICAS", "INDECI"),
     ("ANC fights to keep South Africa's cities", "AFRICA", "BBC"),
-    ("Sudan: Khartoum homes hit, 15 killed", "AFRICA", "News Central"),
-    ("Dashcam shows missile strike on Lviv", "EUROPE", ""),
+    ("Drones hit Khartoum homes, UN site; 4 killed", "AFRICA", "AFP"),
 ]
 
 # (big number, label)
 NUMBERS = [
     ("0.639s", "Verstappen's F1 margin"),
     ("720/9", "India's record Test total"),
-    ("$60,884", "Bitcoin's Sunday close"),
+    ("$60,884", "Bitcoin's Sunday price"),
     ("44 hours", "COP31 overtime to collapse"),
     ("24", "dead in Bayelsa boat disaster"),
-    ("14", "missing after Kyiv drone strike"),
+    ("14", "missing after Dymer drone strike"),
 ]
 
 # (label, pct) — Sunday Gulf closes + Friday S&P
@@ -217,21 +222,21 @@ MARKETS = [
     ("S&P 500 (Fri)", -3.7),
 ]
 
-# (time, place, text)
-HOURS = [
-    ("08:41", "Manama", "Iran claims Bahrain strikes"),
-    ("Morning", "Finland", "Sparta II still burning"),
-    ("10:04", "Seoul", "Minister quits over AI cheating"),
-    ("15:40", "Wellington", "India declare 720/9, a record"),
-    ("Afternoon", "Antalya", "COP31 collapses, no deal"),
-    ("18:00", "Turin", "ATP final: Zverev v Alcaraz"),
+# (minutes after 00:00 UTC, label, above the bar?) — six timestamped events
+TIMELINE = [
+    (0, "00:00  Khartoum drones hit homes", True),
+    (351, "05:51  Peru M5.0 aftershock", False),
+    (600, "10:00  Hong Kong polls close", True),
+    (603, "10:03  Seoul minister quits", False),
+    (993, "16:33  COP31 collapses, no deal", True),
+    (1020, "17:00  ATP final: Zverev v Alcaraz", False),
 ]
 
 # (item, date) — deliberately left out; none is a 22 Nov story
 DATECHECK = [
     ("G20: Johannesburg declaration", "Sat 22 Nov 2025"),
-    ("G20: Argentina walks out", "Sat 22 Nov 2025"),
-    ("Trump-Xi-Putin summit, Shenzhen", "Thu 19-20 Nov"),
+    ("AFCON host cities named", "Sat 21 Nov"),
+    ("Trump shrugs off FBI hack", "Sat 21 Nov"),
     ("ICJ: Myanmar guilty of Rohingya genocide", "Thu 19 Nov"),
     ("El Chapo Isidro captured, Culiacan", "Fri 20 Nov"),
     ("Kryvyi Rih triple-tap", "Fri 20 Nov"),
@@ -246,13 +251,13 @@ PINS = [
     (36.9, 30.7, "Antalya"),
     (26.2, 50.6, "Bahrain"),
     (51.5, 19.5, "Poland"),
-    (50.45, 30.52, "Kyiv"),
+    (50.78, 30.31, "Dymer"),
     (38.9, -77.0, "Washington"),
     (36.17, -115.14, "Las Vegas"),
     (-41.29, 174.78, "Wellington"),
     (40.7, -74.0, "New York"),
     (37.57, 126.98, "Seoul"),
-    (39.28, -80.34, "Clarksburg"),
+    (22.32, 114.17, "Hong Kong"),
     (4.9, 6.3, "Bayelsa"),
     (-6.2, 106.3, "Cikande"),
 ]
@@ -310,6 +315,11 @@ def scene_cop31(d, x, y, w, h):
              (cx - 4, cy + 14), (cx + 6, cy + 26), (cx + 18, cy + 30)]
     d.line(crack, fill=(20, 40, 80), width=3)
     d.line([(cx - 30, cy - 34), (cx + 30, cy - 34)], fill=(200, 220, 240), width=2)
+    # gavel that never fell + delegates below
+    d.rectangle([x + 92, y + 84, x + 116, y + 88], fill=(120, 80, 40))
+    d.rectangle([x + 100, y + 78, x + 108, y + 84], fill=(90, 60, 30))
+    for hx in (x + 16, x + 30, x + 44):
+        d.ellipse([hx - 4, y + 88, hx + 4, y + 96], fill=(230, 220, 200))
 
 
 def scene_bahrain(d, x, y, w, h):
@@ -329,6 +339,13 @@ def scene_bahrain(d, x, y, w, h):
     for r, c in ((16, (255, 200, 60)), (10, (255, 120, 0)), (5, (255, 240, 160))):
         d.ellipse([ex - r, ey - r, ex + r, ey + r], fill=c)
     d.ellipse([x + 78, y + 84, x + 122, y + 96], fill=(120, 60, 20))
+    # second blast + debris + smoke column
+    d.ellipse([x + 18, y + 30, x + 30, y + 42], fill=(255, 160, 40))
+    d.ellipse([x + 22, y + 34, x + 26, y + 38], fill=(255, 240, 160))
+    for ox, oy in ((x + 40, y + 20), (x + 48, y + 14), (x + 36, y + 26)):
+        d.ellipse([ox - 2, oy - 2, ox + 2, oy + 2], fill=(90, 90, 95))
+    for ox, oy, r in ((x + 24, y + 46, 6), (x + 30, y + 38, 4)):
+        d.ellipse([ox - r, oy - r, ox + r, oy + r], fill=(110, 110, 115))
 
 
 def scene_poland(d, x, y, w, h):
@@ -348,6 +365,10 @@ def scene_poland(d, x, y, w, h):
               fill=(255, 200, 180))
     d.ellipse([x + 66, y + 82, x + 76, y + 92], fill=(255, 140, 0))
     d.line([(x + 14, y + 96), (x + 112, y + 96)], fill=(120, 140, 180), width=2)
+    # Polish flag on a pole, bottom right
+    d.line([(x + 108, y + 62), (x + 108, y + 96)], fill=(200, 200, 200), width=2)
+    d.rectangle([x + 108, y + 62, x + 124, y + 70], fill=(255, 255, 255))
+    d.rectangle([x + 108, y + 70, x + 124, y + 78], fill=(220, 40, 60))
 
 
 def scene_kyiv(d, x, y, w, h):
@@ -381,6 +402,16 @@ def scene_kyiv(d, x, y, w, h):
     # smoke
     for ox, oy, r in ((bx + 62, by - 2, 7), (bx + 72, by - 8, 5)):
         d.ellipse([ox - r, oy - r, ox + r, oy + r], fill=(160, 160, 165))
+    # rescue ladder against the standing wall
+    d.line([(bx + bw + 2, by + bh), (bx + bw + 16, by + 22)],
+           fill=(200, 200, 205), width=2)
+    d.line([(bx + bw + 8, by + bh), (bx + bw + 22, by + 22)],
+           fill=(200, 200, 205), width=2)
+    for k in range(4):
+        t = k / 3.0
+        rx = bx + bw + 5 + 14 * t
+        ry = by + bh - 18 - 56 * t
+        d.line([(rx - 3, ry), (rx + 3, ry)], fill=(200, 200, 205), width=2)
 
 
 def scene_pentagon(d, x, y, w, h):
@@ -396,6 +427,12 @@ def scene_pentagon(d, x, y, w, h):
                width=2)
     d.line([(cx, y + 8), (cx, y + 22)], fill=(60, 60, 60), width=2)
     d.polygon([(cx, y + 8), (cx + 12, y + 12), (cx, y + 16)], fill=(192, 57, 43))
+    # shutdown clock, top right
+    kx, ky = x + 106, y + 22
+    d.ellipse([kx - 10, ky - 10, kx + 10, ky + 10], fill=(250, 250, 245),
+              outline=(40, 40, 40))
+    d.line([(kx, ky), (kx, ky - 7)], fill=(40, 40, 40), width=2)
+    d.line([(kx, ky), (kx + 5, ky + 2)], fill=(192, 57, 43), width=2)
     # dollar coins
     for ox, oy in ((x + 12, y + 76), (x + 106, y + 70)):
         d.ellipse([ox - 8, oy - 8, ox + 8, oy + 8], fill=(212, 175, 55),
@@ -431,6 +468,12 @@ def scene_f1(d, x, y, w, h):
                          fy + 7 + r * 7], fill=col)
     for ox in (x + 14, x + 30, x + 46):
         d.line([(ox, y + 66), (ox + 10, y + 62)], fill=(255, 220, 120), width=2)
+    # second car (papaya McLaren) chasing behind
+    px, py = x + 88, y + 68
+    d.polygon([(px - 16, py + 4), (px - 13, py - 4), (px + 2, py - 6),
+               (px + 14, py - 1), (px + 12, py + 4)], fill=(255, 135, 0))
+    for wx in (px - 10, px + 9):
+        d.ellipse([wx - 5, py - 1, wx + 5, py + 7], fill=(20, 20, 20))
 
 
 def scene_cricket(d, x, y, w, h):
@@ -459,6 +502,12 @@ def scene_cricket(d, x, y, w, h):
                       (x + 24, y + 94, (255, 200, 100)),
                       (x + 100, y + 92, (255, 255, 255))):
         d.ellipse([ox - 3, oy - 3, ox + 3, oy + 3], fill=c)
+    # boundary rope + more of the crowd
+    for i in range(7):
+        d.line([(x + 4 + i * 18, y + 82), (x + 14 + i * 18, y + 82)],
+               fill=(255, 255, 255), width=2)
+    for ox, oy in ((x + 36, y + 92), (x + 88, y + 94), (x + 112, y + 90)):
+        d.ellipse([ox - 3, oy - 3, ox + 3, oy + 3], fill=(255, 220, 120))
 
 
 def scene_bitcoin(d, x, y, w, h):
@@ -479,10 +528,19 @@ def scene_bitcoin(d, x, y, w, h):
     d.polygon([(x + 118, y + 32), (x + 124, y + 42), (x + 114, y + 42)],
               fill=(80, 220, 120))
     d.ellipse([x + 80, y + 82, x + 84, y + 86], fill=(80, 220, 120))
+    # gold coins piling up, bottom left
+    for ox, oy in ((x + 12, y + 88), (x + 24, y + 92), (x + 18, y + 80)):
+        d.ellipse([ox - 7, oy - 7, ox + 7, oy + 7], fill=(247, 147, 26),
+                  outline=(150, 90, 0))
+        d.text((ox - 2, oy - 5), "$", font=font(9, bold=True),
+               fill=(255, 255, 255))
 
 
 def scene_seoul(d, x, y, w, h):
     _sky(d, x, y, w, h, (46, 74, 107), (28, 48, 78))
+    # second exam paper behind the front one
+    d.rectangle([x + 20, y + 20, x + 72, y + 88], fill=(230, 230, 225),
+                outline=(150, 150, 150))
     # exam paper
     px, py = x + 14, y + 14
     d.rectangle([px, py, px + 52, py + 68], fill=(250, 250, 245),
@@ -505,32 +563,37 @@ def scene_seoul(d, x, y, w, h):
     d.ellipse([cx - 28, cy - 28, cx + 28, cy + 28], outline=(220, 40, 30),
               width=4)
     d.line([(cx - 20, cy + 20), (cx + 20, cy - 20)], fill=(220, 40, 30), width=4)
+    # a confiscated phone, bottom right
+    d.rectangle([x + 100, y + 76, x + 120, y + 96], fill=(30, 30, 40),
+                outline=(120, 120, 140))
+    d.rectangle([x + 103, y + 79, x + 117, y + 90], fill=(90, 160, 220))
 
 
-def scene_fbi(d, x, y, w, h):
-    _sky(d, x, y, w, h, (42, 42, 58), (26, 26, 38))
-    # laptop
-    lx, ly = x + 16, y + 20
-    d.rounded_rectangle([lx, ly, lx + 66, ly + 46], radius=3, fill=(30, 30, 36),
-                        outline=(120, 120, 130))
-    d.rectangle([lx + 5, ly + 5, lx + 61, ly + 38], fill=(16, 60, 110))
-    d.text((lx + 14, ly + 14), "NCIC", font=font(13, bold=True),
-           fill=(255, 255, 255))
-    d.polygon([(lx - 6, ly + 46), (lx + 72, ly + 46), (lx + 78, ly + 54),
-               (lx - 12, ly + 54)], fill=(60, 60, 70))
-    # padlock
-    px, py = x + 88, y + 44
-    d.arc([px - 10, py - 22, px + 10, py - 2], 180, 360, fill=(212, 175, 55),
-          width=4)
-    d.rounded_rectangle([px - 13, py - 4, px + 13, py + 18], radius=3,
-                        fill=(212, 175, 55))
-    d.ellipse([px - 2, py + 3, px + 2, py + 7], fill=(90, 60, 0))
-    # warning triangle
-    tx, ty = x + 18, y + 70
-    d.polygon([(tx, ty), (tx + 22, ty), (tx + 11, ty - 18)], fill=(255, 200, 0),
-              outline=(180, 130, 0))
-    d.text((tx + 8, ty - 15), "!", font=font(11, bold=True), fill=(40, 40, 40))
-    d.line([(x + 84, y + 78), (x + 116, y + 78)], fill=(120, 120, 140), width=2)
+def scene_hongkong(d, x, y, w, h):
+    _sky(d, x, y, w, h, (120, 170, 210), (70, 110, 160))
+    # skyline silhouettes
+    for bx, bw, bh in ((x + 4, 16, 34), (x + 24, 12, 46), (x + 92, 14, 40),
+                       (x + 110, 12, 30)):
+        d.rectangle([bx, y + 78 - bh, bx + bw, y + 78], fill=(60, 80, 110))
+    d.rectangle([x, y + 78, x + w, y + h], fill=(90, 110, 140))
+    # ballot paper going in
+    d.polygon([(x + 52, y + 18), (x + 74, y + 12), (x + 80, y + 38),
+               (x + 58, y + 44)], fill=(250, 250, 245),
+              outline=(150, 150, 150))
+    d.line([(x + 58, y + 26), (x + 72, y + 22)], fill=(60, 60, 60), width=1)
+    d.line([(x + 60, y + 32), (x + 70, y + 29)], fill=(60, 60, 60), width=1)
+    # green check on the ballot
+    d.line([(x + 62, y + 36), (x + 66, y + 40), (x + 74, y + 30)],
+           fill=(30, 122, 52), width=2)
+    # ballot box
+    bx, by = x + 40, y + 52
+    d.rectangle([bx, by, bx + 52, by + 40], fill=(31, 78, 121),
+                outline=(20, 50, 90))
+    d.rectangle([bx + 6, by + 8, bx + 46, by + 12], fill=(16, 32, 58))
+    d.text((bx + 26, by + 18), "VOTE", font=font(11, bold=True),
+           fill=(255, 255, 255), anchor="ma")
+    # red seal dot
+    d.ellipse([bx + 40, by + 30, bx + 48, by + 38], fill=(192, 57, 43))
 
 
 def scene_nigeria(d, x, y, w, h):
@@ -556,6 +619,13 @@ def scene_nigeria(d, x, y, w, h):
     d.ellipse([rx - 4, ry - 4, rx + 4, ry + 4], outline=(255, 110, 0), width=2)
     # distant bank
     d.rectangle([x, y + 98, x + w, y + h], fill=(40, 90, 60))
+    # sun + a small rescue boat, left
+    d.ellipse([x + 8, y + 8, x + 24, y + 24], fill=(255, 220, 100))
+    d.polygon([(x + 8, y + 62), (x + 40, y + 62), (x + 34, y + 70),
+               (x + 14, y + 70)], fill=(255, 110, 0))
+    d.line([(x + 24, y + 62), (x + 24, y + 48)], fill=(90, 55, 20), width=2)
+    d.polygon([(x + 24, y + 48), (x + 36, y + 60), (x + 24, y + 60)],
+              fill=(255, 255, 255))
 
 
 def scene_cikande(d, x, y, w, h):
@@ -570,9 +640,9 @@ def scene_cikande(d, x, y, w, h):
     d.rectangle([fx + 58, fy - 26, fx + 68, fy], fill=(110, 110, 115))
     for wx in (fx + 10, fx + 30, fx + 50):
         d.rectangle([wx, fy + 12, wx + 12, fy + 24], fill=(60, 70, 90))
-    # smoke
-    for ox, oy, r in ((fx + 63, fy - 34, 7), (fx + 70, fy - 44, 5),
-                      (fx + 56, fy - 46, 5)):
+    # smoke (kept inside the scene: chimney top is fy-26, scene top is y)
+    for ox, oy, r in ((fx + 63, fy - 22, 7), (fx + 70, fy - 24, 5),
+                      (fx + 56, fy - 22, 5)):
         d.ellipse([ox - r, oy - r, ox + r, oy + r], fill=(140, 140, 145))
     # flames
     for ox, oh, c in ((fx + 6, 26, (255, 140, 0)), (fx + 24, 34, (255, 180, 0)),
@@ -580,11 +650,15 @@ def scene_cikande(d, x, y, w, h):
         d.polygon([(ox, fy + 56), (ox + 8, fy + 56 - oh),
                    (ox + 16, fy + 56)], fill=c)
     d.rectangle([x, y + 88, x + w, y + h], fill=(40, 30, 22))
+    # fire hose arcing in from the left + one more smoke puff
+    d.arc([x - 10, y + 56, x + 46, y + 100], 270, 360, fill=(90, 160, 220),
+          width=3)
+    d.ellipse([fx + 68, fy - 20, fx + 76, fy - 12], fill=(140, 140, 145))
 
 
 SCENES = [scene_cop31, scene_bahrain, scene_poland, scene_kyiv,
           scene_pentagon, scene_f1, scene_cricket, scene_bitcoin,
-          scene_seoul, scene_fbi, scene_nigeria, scene_cikande]
+          scene_seoul, scene_hongkong, scene_nigeria, scene_cikande]
 
 
 # ---------------------------------------------------------------- layout
@@ -593,9 +667,9 @@ WARN = []
 
 def region_counts(d, x_right, y):
     items = [("OCEANIA", 1, "OCEANIA"), ("GLOBAL", 2, "GLOBAL"),
-             ("AFRICA", 4, "AFRICA"), ("ASIA", 5, "ASIA"),
-             ("AMERICAS", 7, "AMERICAS"), ("MIDDLE EAST", 8, "M. EAST"),
-             ("EUROPE", 9, "EUROPE")]
+             ("AFRICA", 3, "AFRICA"), ("ASIA", 5, "ASIA"),
+             ("AMERICAS", 5, "AMERICAS"), ("MIDDLE EAST", 8, "M. EAST"),
+             ("EUROPE", 7, "EUROPE")]
     f = font(11, bold=True)
     parts = []
     total = 0
@@ -623,7 +697,7 @@ def masthead(d):
            font=font(15, bold=True), fill=GOLD)
     dx = M + int(d.textlength("SUNDAY 22 NOVEMBER 2026",
                               font=font(15, bold=True))) + 12
-    d.text((dx, 54), "36 stories  ·  7 regions  ·  12 drawn scenes",
+    d.text((dx, 54), "31 stories  ·  7 regions  ·  12 drawn scenes",
            font=font(11), fill=(220, 225, 235))
     region_counts(d, W - M, 32)
 
@@ -703,34 +777,48 @@ def markets_band(d):
         d.rectangle([x + 8, cy + 32, x + 8 + bw, cy + 35], fill=RED)
 
 
-def hours_band(d):
+def timeline_band(d):
     y = 726
-    d.text((M, y), "THE DAY BY HOURS", font=font(12, bold=True), fill=INK)
-    d.text((W - M, y + 1), "All times local", font=font(9), fill=MUTED,
+    d.text((M, y), "THE DAY IN UTC", font=font(12, bold=True), fill=INK)
+    d.text((M + 118, y + 1), "when each story broke, on one clock",
+           font=font(11), fill=MUTED)
+    d.text((W - M, y + 1), "All times UTC", font=font(9), fill=MUTED,
            anchor="ra")
-    d.line([(M, y + 16), (W - M, y + 16)], fill=LINE, width=1)
-    for i, (t, place, txt) in enumerate(HOURS):
-        r, c = divmod(i, 3)
-        x = M + c * (324 + 12)
-        yy = y + 20 + r * 14
-        d.text((x, yy), t, font=font(10, bold=True), fill=NAVY2)
-        tx = x + int(d.textlength(t, font=font(10, bold=True))) + 6
-        d.text((tx, yy), place, font=font(10, bold=True), fill=INK)
-        px = tx + int(d.textlength(place, font=font(10, bold=True))) + 6
-        d.text((px, yy), txt, font=font(10), fill=(40, 40, 40))
+    # bar 00:00 -> 24:00 UTC
+    by = y + 30
+    d.line([(M, by), (W - M, by)], fill=LINE, width=2)
+    d.text((M, by + 6), "00:00", font=font(8), fill=MUTED)
+    d.text((W - M, by + 6), "24:00", font=font(8), fill=MUTED, anchor="ra")
+    tf = font(9, bold=True)
+    xf = font(9)
+    for mins, label, above in TIMELINE:
+        cx = M + int(mins / 1440.0 * CW)
+        d.ellipse([cx - 4, by - 4, cx + 4, by + 4], fill=RED,
+                  outline=(255, 255, 255))
+        # split "HH:MM  text" into a bold time + plain text
+        t, _, txt = label.partition("  ")
+        tw = int(d.textlength(t, font=tf)) + 4
+        total = tw + int(d.textlength(txt, font=xf))
+        ly = by - 15 if above else by + 6
+        # keep the label inside the page
+        lx = min(cx, W - M - total)
+        lx = max(M, lx)
+        if lx + total > W - M:
+            WARN.append("timeline label too long: %s" % label)
+        d.text((lx, ly), t, font=tf, fill=NAVY2)
+        d.text((lx + tw, ly), txt, font=xf, fill=(40, 40, 40))
 
 
 def also_band(d):
-    y = 774
-    d.text((M, y), "ALSO TODAY — 24 MORE STORIES FROM THE SAME DAY",
+    y = 778
+    d.text((M, y), "ALSO TODAY — 19 MORE STORIES FROM THE SAME DAY",
            font=font(12, bold=True), fill=INK)
     d.line([(M, y + 16), (W - M, y + 16)], fill=LINE, width=1)
-    f = font(10)
-    fs = font(9)
+    f = font(11)
     for i, (lead, region, src) in enumerate(ALSO):
         r, c = divmod(i, 3)
         x = M + c * (324 + 12)
-        yy = y + 20 + r * 12
+        yy = y + 20 + r * 14
         col = REGION[region]
         d.ellipse([x, yy + 3, x + 6, yy + 9], fill=col)
         txt = lead + ("  —  " + src if src else "")
@@ -765,10 +853,10 @@ def bottom_band(d):
     d.text((M, y), "WHERE IT HAPPENED", font=font(11, bold=True), fill=INK)
     world_map(d, M, y + 14, 330, 72)
     lf = font(8)
-    d.text((M, y + 88), "Pins: 1 Antalya · 2 Bahrain · 3 Poland · 4 Kyiv · "
+    d.text((M, y + 88), "Pins: 1 Antalya · 2 Bahrain · 3 Poland · 4 Dymer · "
            "5 Washington · 6 Las Vegas", font=lf, fill=MUTED)
     d.text((M, y + 97), "7 Wellington · 8 New York · 9 Seoul · "
-           "10 Clarksburg · 11 Bayelsa · 12 Cikande", font=lf, fill=MUTED)
+           "10 Hong Kong · 11 Bayelsa · 12 Cikande", font=lf, fill=MUTED)
     # --- date check column
     dx = 356
     d.text((dx, y), "DATE CHECK", font=font(11, bold=True), fill=INK)
@@ -814,7 +902,7 @@ def bottom_band(d):
 
 
 def footer(d):
-    d.text((M, 1006), "All 36 stories dated Sunday 22 November 2026  ·  "
+    d.text((M, 1006), "All 31 stories dated Sunday 22 November 2026  ·  "
            "Sources: Reuters, AP, AFP, Al Jazeera, Formula 1, Cricinfo, ATP, "
            "CNN, BBC  ·  Rendered deterministically from verified reports  ·  "
            "Fri markets: S&P 500 -3.7%, Nasdaq -5.3%",
@@ -828,7 +916,7 @@ def render():
     heroes(d)
     numbers_band(d)
     markets_band(d)
-    hours_band(d)
+    timeline_band(d)
     also_band(d)
     bottom_band(d)
     footer(d)
