@@ -1,69 +1,57 @@
-# news-image-20261122 — RIVAL9: "THE SUNDAY RECORD" (round 9)
+# news-image-20261122 — RIVAL10: "THE SUNDAY CHRONICLE"
 
-A one-page Sunday newspaper front page for 22 November 2026: 37 stories
-across 7 regions, every date checked. Built from scratch with PIL only.
+One-page newspaper front page for Sunday 22 November 2026: 36 stories
+(3 hero + 19 grid + 14 ALSO), 22 pinned on a dotted world map with a
+Pacific inset, DATE CHECK 21 items, MARKETS 6 figures, certainty labels
+(REPORTED / CLAIM / FORECAST) + HOW TO READ legend.
 
-## Opponent
+## What changed vs RIVAL9 (round-10 levers)
 
-RIVAL8 (commit `5ced8477`, branch `rival8`) — won duel round 8 4–0–2
-vs RIVAL7. This build keeps RIVAL8's verified facts and applies the
-round-8 jury's levers:
+1. **Hero 1 art rebuilt with perspective** — COP31 final plenary now has a
+   warm spotlight cone, a small back row of delegates, a larger front row
+   with varied skin tones / suits / laptops, shadows, a foreground
+   presidium desk, and three empty walkout chairs under the red WALKOUT
+   banner. Hero 3 (Manama) rebuilt the same way: hazy far skyline, burning
+   industrial plant mid-ground, scalloped sea with fire reflections, a
+   large foreground radar dish and an interceptor arc.
+2. **Kryvyi Rih toll updated**: card 9 now reads "73 hurt" — the toll rose
+   through Saturday (58 by Sat a.m., 73 by Sat evening incl. 9 children,
+   Ukrinform / Vilkul).
+3. **Duplication removed**: ALSO #30 (Mlambo-Ngcuka service) dropped — it
+   duplicated the DATE CHECK item "Mlambo-Ngcuka dies — Fri 20 Nov".
+   37 → 36 stories (now exactly #1's count); the freed space is footer
+   whitespace, no story added.
+4. **Footer lightened**: DATE CHECK 22 → 21 (weakest item, the EU–Indonesia
+   deal, cut; all six strong traps kept: 148-drone, 400-drone, Nvidia,
+   El Chapo, Trump–Xi–Putin, H-6) with slightly roomier leading.
+5. **48h overtime re-verified, kept**: scheduled close Fri 18:00 local;
+   decisive plenary Sun late afternoon (~47h past close per live blogs;
+   Politico Europe: "48 hours past its scheduled finish"). The AP variant
+   "more than 50 hours" conflicts with the gavel timeline (plenary set
+   09:00 → 11:00 local, Kurum's no-adoption announcement in the morning
+   session, conference ending ~17:00 local) and with three outlets
+   reporting ~44h from an earlier baseline — 48h remains the best-supported
+   single figure.
+6. **Europe pins fanned out further**: numbered pins around the cluster now
+   carry larger nudges with leader lines to their true spots.
 
-1. **COP31 overtime 44h → 48h** — stat band, hero 1 kicker and deck.
-   Verified: thegist (citing Politico Europe) "closed on Sunday 22
-   November 48 hours past its scheduled finish"; AP "running nearly
-   48 hours overtime"; Reuters "spilled two days into overtime";
-   The Times "running two days past the finish date". Scheduled close
-   was Friday 20 Nov 18:00 local (UNFCCC); the closing plenary ran to
-   late Sunday afternoon. COP25's 44h record is beaten, so COP31 > 44h.
-2. **DATE CHECK trap** — "148-drone night / Kryvyi Rih double-tap —
-   Fri 20–Sat 21 Nov" replaces the weakest item (Senate $350bn defence
-   push). Verified: Ukraine Air Force — 3 ballistic missiles + 148
-   drones (87 jet-powered) between 18:00 20 Nov and the morning of
-   21 Nov; Kryvyi Rih double-tap killed a 7-year-old boy and a
-   20-year-old paramedic, 58 injured.
-3. **Disambiguation** — hero 2 deck now reads "Tonight: 186 drones,
-   not 400." The 400-drone barrage (404 drones + 111 missiles) was the
-   night of 19–20 Nov; tonight's raid (night of 21–22 Nov) is 186
-   drones, 161 downed or jammed (Ukraine Air Force).
-4. **Hero 2 (Kyiv) art redrawn with depth** — layered skyline, haze,
-   smoke column, searchlight beams, moon halo, drone silhouettes.
-5. **Footer** — map band ~12px shorter; the room goes to DATE CHECK
-   line-height. Story count unchanged (37).
-6. **Varied mini illustrations** on the top grid cards (ballot box,
-   cricket stumps, chequered flag, exam paper, ship + flame) and more.
+## Heritage facts (all kept, re-verified 23 Nov 2026)
 
-## Inherited (verified in rounds 1–8)
-
-- COP31 collapses with no deal — first breakdown since COP15 in 2009;
-  the EU walked out (CNN, NPR).
-- Bahrain: two hurt; a civilian plant burned.
-- Hong Kong turnout final 98.79% (5,640 of 5,709).
-- Japan poll 62% feel affinity to Korea (not 52%).
-- Bayelsa boat toll 24 (not 26).
-- Liverpool rout Man Utd 4–0 on Pochettino debut (Szoboszlai 10',
-  Wirtz 13', Ngumoha 66', Muñoz 82'; Yoro off 8').
-- MARKETS: gold $3,539; Bitcoin $61,568; TASI 9,960.44 −1.95%;
-  QSE 9,902.87 −1.59%; EGX30 49,989.79 −2.85%; EGX70 16,534.42 −5.55%.
-- Moldova: ONE Russian jet drone crossed the border twice near Purcari
-  on Sat 21 Nov († SAT).
-- Manipur liquor toll 19, 600+ in hospital — Sun a.m., still rising.
-- Certainty labels + HOW TO READ legend; 22 pinned stories on the
-  world map with a Pacific inset (Wellington 5 · Canberra 17).
-
-## Files
-
-- `render_rival9.py` — the renderer (PIL only, deterministic).
-- `main.py` — entrypoint: renders, then copies `poster.png` into
-  `$MAKEFUN_OUTPUT_DIR` (clears only the directory's contents).
-- `poster.png` — the rendered 1024×1024 front page.
-- `README.md` — this file.
-- `LICENSE` — MIT.
+COP31 no-deal, "first breakdown since COP15 in 2009", "48 HOURS OVERTIME",
+EU walked out; Bahrain 2 hurt + civilian plant burned; HK final 98.79%
+(5,640/5,709, count done 22:15 — info.gov.hk); Japan 62%; Bayelsa 24;
+Liverpool 4–0 (Szoboszlai 10', Wirtz 13', Ngumoha 66', Muñoz 82';
+Yoro sent off 8'; United 19th); Moldova — one drone jet crossed twice
+near Purcari † SAT (21 Nov 11:20/11:25/11:31/11:32); 400-drone barrage
+19–20 Nov (404 drones + 111 missiles); 148-drone night / Kryvyi Rih
+double-tap Fri 20–Sat 21 Nov; "Tonight: 186 drones, not 400." (raid
+21–22 Nov = 186 drones, 161 downed/jammed; barrage 400 = night 19–20 Nov);
+Manipur "19, 600+ — Sun a.m., still rising"; MARKETS — gold $3,539
+(spot $3,539.00 Sun 22 Nov), BTC $61,568, TASI 9,960.44 −1.95%,
+QSE 9,902.87 −1.59%, EGX30 49,989.79 −2.85%, EGX70 16,534.42 −5.55%.
 
 ## Build
 
-```sh
-python3 render_rival9.py poster.png
-```
-
-Render twice and compare hashes to confirm determinism.
+`python3 render_rival10.py [outdir]` renders `poster.png` (1024×1024,
+deterministic — identical bytes every run). `python3 main.py` renders to a
+temp dir and copies the poster into `$MAKEFUN_OUTPUT_DIR`.
